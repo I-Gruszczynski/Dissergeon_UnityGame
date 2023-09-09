@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 95d0bce6ad6b6da4aaa0a3641c533c53
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - enemy: {fileID: 4749674816534229260, guid: f44330d0c292b5e46877a245d82da075, type: 3}
+  - sceneFade: {fileID: 8502105015435296193, guid: d024d9a8357d7b148bcef5578ed73f94, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

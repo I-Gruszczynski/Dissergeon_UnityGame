@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: f5910e2fa68e1a74192ad4a64529fbbd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - closedRoom: {fileID: 6389471706874951466, guid: 103aa959c6f62924ca5df4e7a956a44f, type: 3}
+  - circle: {fileID: -2413806693520163455, guid: 27e714c064194294ebb70f99159cb496, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
