@@ -60,7 +60,8 @@ public class RoomTemplates : MonoBehaviour
                     
 
                     spawnStairs = true;
-                    rooms[i].transform.Find("AllRandomObj").gameObject.SetActive(false);
+                    //rooms[i].transform.Find("AllRandomObj").gameObject.SetActive(false);
+                    Destroy(rooms[i].transform.Find("AllRandomObj").gameObject);
                 }
                 if (rooms[i].gameObject.name == "R(Clone)" || rooms[i].gameObject.name == "L(Clone)" || rooms[i].gameObject.name == "T(Clone)" || rooms[i].gameObject.name == "B(Clone)")
                 {
@@ -73,7 +74,9 @@ public class RoomTemplates : MonoBehaviour
                         Debug.Log("Znaleziono");
                         chest.transform.position = new Vector3(rooms[i].transform.position.x, rooms[i].transform.position.y, -2f);
                         spawnChest = true;
-                        rooms[i].transform.Find("AllRandomObj").gameObject.SetActive(false);
+                        chest.gameObject.transform.SetParent(rooms[i].transform);
+                        //rooms[i].transform.Find("AllRandomObj").gameObject.SetActive(false);
+                        Destroy(rooms[i].transform.Find("AllRandomObj").gameObject);
                     }
                 }
             }

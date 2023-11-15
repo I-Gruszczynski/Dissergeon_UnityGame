@@ -11,6 +11,8 @@ public class PlayerExp : MonoBehaviour
     public Slider  expBar;
     GameObject[] enemies;
 
+    public GameObject levelUp;
+
     int enemyHealth;
     int playerLevelInt;
     bool nextLevel = false;
@@ -37,6 +39,8 @@ public class PlayerExp : MonoBehaviour
         {
             playerLevelInt++;
             nextLevel = false;
+            levelUp.SetActive(true);
+            Time.timeScale = 0f;
         }
 
         playerLevel.text = playerLevelInt.ToString();

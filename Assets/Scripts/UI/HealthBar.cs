@@ -10,7 +10,7 @@ public class HealthBar : MonoBehaviour
     public Slider healthSlider;
     public Slider healthSliderWhite;
     float time;
-    float healthPlayer = 100;
+    public float healthPlayer = 100;
     public float currentHealth;
     int rand;
 
@@ -46,15 +46,26 @@ public class HealthBar : MonoBehaviour
         //currentHealth = player.GetComponent<PlayerHealth>().currnetHealth;
         rand = player.GetComponent<PlayerHealth>().rand;
         time += Time.deltaTime * 0.7f;
-        if (currentHealth != player.GetComponent<PlayerHealth>().currnetHealth)
+        
+        if (currentHealth > player.GetComponent<PlayerHealth>().currnetHealth)
         {
             currentHealth -= rand;
             //float smoothCurrentScore = Mathf.Lerp(maxHealth, currentHealth, time);
             time = 0;
             healthSlider.value  = currentHealth;
         }
-        healthSliderWhite.value = Mathf.Lerp(healthSliderWhite.value, currentHealth, time);
 
+        if (currentHealth < player.GetComponent<PlayerHealth>().currnetHealth)
+        {
+            currentHealth += 10;
+            //float smoothCurrentScore = Mathf.Lerp(maxHealth, currentHealth, time);
+            time = 0;
+            healthSlider.value = currentHealth;
+        }
+
+
+        healthSliderWhite.value = Mathf.Lerp(healthSliderWhite.value, currentHealth, time);
+        
     }
 
     public void AniamteHealthBar()

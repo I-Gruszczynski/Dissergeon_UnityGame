@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PickupItems : MonoBehaviour
 {
     public Text coinCounter;
-    int coinCounterInt;
+    public int coinCounterInt;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +20,7 @@ public class PickupItems : MonoBehaviour
         {
             coinCounter.text = "0";
         }
+        coinCounter.text = coinCounterInt.ToString();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

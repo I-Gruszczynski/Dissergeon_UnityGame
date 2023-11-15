@@ -24,10 +24,10 @@ public class RoomLightScript : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            lightMain.intensity = 1;
+            lightMain.intensity = 0.5f;
             foreach (Light2D light in lightWall)
             {
-                light.intensity = 0.3f;
+                light.intensity = 0.1f;
             }
 
         }
@@ -37,7 +37,7 @@ public class RoomLightScript : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            lightMain.intensity = 0.5f;
+            lightMain.intensity = 0.3f;
             foreach (Light2D light in lightWall)
             {
                 light.intensity = 0;

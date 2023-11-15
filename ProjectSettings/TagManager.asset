@@ -19,6 +19,9 @@ TagManager:
   - Gun
   - BulletEnemy
   - ToxicZone
+  - Chest
+  - BrickBorder
+  - Stairs
   layers:
   - Default
   - TransparentFX
@@ -29,8 +32,8 @@ TagManager:
   - TRBL
   - Obstycle
   - Enemy
-  - 
-  - 
+  - MinimapTile
+  - Minimap Light
   - 
   - 
   - 
@@ -55,6 +58,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: MinimapTile
+    uniqueID: 3596799139
     locked: 0
   - name: Wall
     uniqueID: 1446985435
@@ -130,4 +136,7 @@ TagManager:
     locked: 0
   - name: GunStat
     uniqueID: 3397642195
+    locked: 0
+  - name: PickUpObjects
+    uniqueID: 1562617635
     locked: 0

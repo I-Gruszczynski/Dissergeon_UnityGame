@@ -77,6 +77,29 @@ public class CameraFollow : MonoBehaviour
     {
 
     }
+    /*
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (gameObject.isStatic)
+        {
+            for (int i = 0; i < collision.transform.childCount; i++)
+            {
+                collision.transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (gameObject.isStatic)
+        {
+            for (int i = 0; i < collision.transform.childCount; i++)
+            {
+                collision.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+    }
+    */
 }
 
 

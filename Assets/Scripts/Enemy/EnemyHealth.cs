@@ -9,6 +9,7 @@ using UnityEngine.XR;
 public class EnemyHealth : MonoBehaviour
 {
     public int enemyHealth = 100;
+    public int bulletDamage = 10;
     public bool obstycleCollision;
     public bool obstycleCollisionUpdate;
 
@@ -37,6 +38,8 @@ public class EnemyHealth : MonoBehaviour
     private float pasttime = 0;
     private float when = 3.0f;
     private Vector3 off;
+
+    public GameObject bullet;
 
     // Start is called before the first frame update
     void Start()
@@ -82,7 +85,7 @@ public class EnemyHealth : MonoBehaviour
         if (collision.CompareTag("Bullet"))
         {
 
-            enemyHealth = enemyHealth - 20;
+            enemyHealth = enemyHealth - bullet.GetComponent<BulletCollision>().bulletDamage;
 
             if (enemyHealth <= 0)
             {
