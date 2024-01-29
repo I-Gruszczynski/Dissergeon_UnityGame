@@ -27,6 +27,7 @@ public class RifleShooting : MonoBehaviour
 
     public GameObject holder;
     public GameObject gunBox;
+    public GameObject objectContainer;
     bool canShoot;
     // Start is called before the first frame update
     void Start()
@@ -42,7 +43,7 @@ public class RifleShooting : MonoBehaviour
         {
             canShoot = true;
         }
-        if (gameObject.transform.parent == gunBox.transform)
+        if (gameObject.transform.parent == gunBox.transform || gameObject.transform.parent == objectContainer.transform)
         {
             canShoot = false;
         }
@@ -62,51 +63,66 @@ public class RifleShooting : MonoBehaviour
 
         player.transform.rotation = Quaternion.Euler(0, 0, 0);
         //transform.rotation = Quaternion.Euler(0, 0, 0);
-        if (Input.GetMouseButton(0) && bulletMagazineNumber > 0 && canShoot)
+        if (canShoot)
         {
-            if (IsAvailable == false)
+            if (Input.GetMouseButton(0) && bulletMagazineNumber > 0)
             {
-                return;
+                if (IsAvailable == false)
+                {
+                    return;
+                }
+                else if (IsAvailable == true)
+                {
+                    gunAnimator.SetBool("RifleRecoil", true);
+                    rand1 = UnityEngine.Random.Range(-5f, 5f);
+                    Vector3 spread = new Vector3(0, 0, rand1);
+                    //Quaternion newRot = Quaternion.Euler(gameObject.transform.localEulerAngles.x, gameObject.transform.localEulerAngles.y, gameObject.transform.localEulerAngles.z + rand1);
+                    //Debug.Log(newRot);
+                    GameObject bulletVar = Instantiate(bullet, firePoint.position, Quaternion.Euler(firePoint.rotation.eulerAngles + spread));
+                    Rigidbody2D rb = bulletVar.GetComponent<Rigidbody2D>();
+                    rb.AddForce(bulletVar.transform.up * bulletSpped, ForceMode2D.Impulse);
+                    bulletMagazineNumber--;
+                    StartCoroutine(StartCooldown());
+                }
+
             }
-            else if (IsAvailable == true)
-            { 
-                gunAnimator.SetBool("RifleRecoil", true);
-                rand1 = UnityEngine.Random.Range(-5f, 5f);
-                Vector3 spread = new Vector3(0, 0, rand1);
-                //Quaternion newRot = Quaternion.Euler(gameObject.transform.localEulerAngles.x, gameObject.transform.localEulerAngles.y, gameObject.transform.localEulerAngles.z + rand1);
-                //Debug.Log(newRot);
-                GameObject bulletVar = Instantiate(bullet, firePoint.position, Quaternion.Euler(firePoint.rotation.eulerAngles + spread));
-                Rigidbody2D rb = bulletVar.GetComponent<Rigidbody2D>();
-                rb.AddForce(bulletVar.transform.up * bulletSpped, ForceMode2D.Impulse);
-                bulletMagazineNumber--;
-                StartCoroutine(StartCooldown());
-            }
-
-         }
-
-
-        if (Input.GetKeyDown(KeyCode.R) || bulletMagazineNumber <= 0 && canShoot)
-        {
-            if (bulletMagazineNumber != bulletMagazineNumberTemp)
+            else if (Input.GetMouseButton(0) && bulletMagazineNumber <= 0)
             {
-                StartCoroutine(Reload());
-                bulletMaxNumber = bulletMaxNumber - (bulletMagazineNumberTemp - bulletMagazineNumber);
-                bulletMagazineNumber = bulletMagazineNumberTemp;
+                IsAvailable = false;
             }
+
+
+                if (Input.GetKeyDown(KeyCode.R) || bulletMagazineNumber <= 0)
+            {
+                if (bulletMagazineNumber != bulletMagazineNumberTemp)
+                {
+                    StartCoroutine(Reload());
+                    bulletMaxNumber = bulletMaxNumber - (bulletMagazineNumberTemp - bulletMagazineNumber);
+                    bulletMagazineNumber = bulletMagazineNumberTemp;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.R) && bulletMaxNumber <= 0)
+            {
+                IsAvailable = false;
+            }
+
+
+            if (bulletMagazineNumber >=0 && bulletMaxNumber >= 0)
+            {
+                AmmoMagazineText.text = bulletMagazineNumber.ToString();
+                MaxAmmoText.text = bulletMaxNumber.ToString();
+            }
+            else
+            {
+                AmmoMagazineText.text = "0";
+                MaxAmmoText.text = "0";
+                IsAvailable = false;
+            }
+
         }
 
-        if (bulletMagazineNumber >=0 && bulletMaxNumber >= 0)
-        {
-            AmmoMagazineText.text = bulletMagazineNumber.ToString();
-            MaxAmmoText.text = bulletMaxNumber.ToString();
-        }
-        else
-        {
-            AmmoMagazineText.text = "0";
-            MaxAmmoText.text = "0";
-        }
 
-        
     }
 
     IEnumerator Reload()

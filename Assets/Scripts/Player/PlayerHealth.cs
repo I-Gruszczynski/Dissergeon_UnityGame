@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     public GameObject HealthBar;
-    public float currnetHealth = 100;
+    public static float currnetHealth = 100f;
     public bool hit = false;
     public bool hitToxic = false;
     public int rand;
 
     public Material defaultMat;
     public Material flashMat;
+
+    [Header("Death Screen")]
+    public Animator animatorDeath;
+    public Animator animatorPlayerDeath;
+    public GameObject deathScreen;
+    public GameObject holder;
+    public GameObject playerCircle;
+
 
     private void Start()
     {
@@ -35,6 +44,15 @@ public class PlayerHealth : MonoBehaviour
             currnetHealth = currnetHealth - rand;
             StartCoroutine(ToxicImmune());
             hitToxic = false;
+        }
+
+        if (currnetHealth <= 0)
+        {
+            playerCircle.GetComponent<PlayerMovement>().enabled = false;
+            playerCircle.GetComponent<MousePosition>().enabled = false;
+            gameObject.GetComponent<PlayerShooting>().enabled = false;
+            holder.SetActive(false);
+            animatorPlayerDeath.Play("PlayerDeath");
         }
     }
 
@@ -67,5 +85,11 @@ public class PlayerHealth : MonoBehaviour
         hitToxic = false;
         yield return new WaitForSeconds(1f);
 
+    }
+
+    public void DeathScene()
+    {
+        deathScreen.SetActive(true);
+        animatorDeath.Play("DeathIdle");
     }
 }

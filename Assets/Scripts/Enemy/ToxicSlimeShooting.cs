@@ -97,7 +97,6 @@ public class ToxicSlimeShooting : MonoBehaviour
                 Destroy(bulletVar);
             }
 
-            Debug.Log("Obecna skala " + bulletVar.transform.localScale);
         }
 
         

@@ -19,18 +19,21 @@ TagManager:
   - Gun
   - BulletEnemy
   - ToxicZone
+  - Chest
+  - BrickBorder
+  - Stairs
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - TRBL
   - Obstycle
   - Enemy
-  - 
-  - 
+  - MinimapTile
+  - Minimap Light
   - 
   - 
   - 
@@ -56,8 +59,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: MinimapTile
+    uniqueID: 3596799139
+    locked: 0
   - name: Wall
     uniqueID: 1446985435
+    locked: 0
+  - name: BrickBorder
+    uniqueID: 2005049373
     locked: 0
   - name: TRBL
     uniqueID: 3210951715
@@ -130,4 +139,7 @@ TagManager:
     locked: 0
   - name: GunStat
     uniqueID: 3397642195
+    locked: 0
+  - name: PickUpObjects
+    uniqueID: 1562617635
     locked: 0

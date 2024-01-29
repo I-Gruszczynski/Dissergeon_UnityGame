@@ -19,7 +19,7 @@ public class BulletCollisionEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-       if(other.gameObject.tag != "BulletEnemy" && other.gameObject.tag != "Enemy" && other.gameObject.tag != "RoomFloor" && other.gameObject.tag != "SpawnPoint" && other.gameObject.tag != "Coin" && other.gameObject.tag != "Ammo" && other.gameObject.tag != "Player" && other.gameObject.tag != "Bullet")
+       if(other.gameObject.tag != "BulletEnemy" && other.gameObject.tag != "Enemy" && other.gameObject.tag != "RoomFloor" && other.gameObject.tag != "SpawnPoint" && other.gameObject.tag != "Coin" && other.gameObject.tag != "Ammo" && other.gameObject.tag != "Player" && other.gameObject.tag != "Bullet" && other.gameObject.tag != "BrickBorder" && other.gameObject.tag != "Gun")
         {
             if (other.gameObject.tag != "Player")
             {

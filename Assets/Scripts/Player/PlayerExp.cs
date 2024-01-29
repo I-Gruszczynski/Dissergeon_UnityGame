@@ -11,8 +11,11 @@ public class PlayerExp : MonoBehaviour
     public Slider  expBar;
     GameObject[] enemies;
 
+    public GameObject levelUp;
+    public Animator animatorlevelUp;
+
     int enemyHealth;
-    int playerLevelInt;
+    static int playerLevelInt;
     bool nextLevel = false;
 
     // Start is called before the first frame update
@@ -37,6 +40,9 @@ public class PlayerExp : MonoBehaviour
         {
             playerLevelInt++;
             nextLevel = false;
+            levelUp.SetActive(true);
+            animatorlevelUp.Play("show");
+            Time.timeScale = 0f;
         }
 
         playerLevel.text = playerLevelInt.ToString();

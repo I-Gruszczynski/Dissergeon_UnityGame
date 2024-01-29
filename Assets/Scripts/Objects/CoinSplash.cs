@@ -34,7 +34,6 @@ public class CoinSplash : MonoBehaviour
             objTrans.position += off * Time.deltaTime;
             delay += pasttime;
 
-            Debug.Log("Moneta sie rozsypuje");
         }
         else
         {

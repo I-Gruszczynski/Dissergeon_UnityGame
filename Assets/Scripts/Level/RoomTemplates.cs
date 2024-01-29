@@ -32,7 +32,44 @@ public class RoomTemplates : MonoBehaviour
         {
             for (int i = 0; i < rooms.Count; i++)
             {
-                if (i == rooms.Count-1)
+                
+                //if (rooms[i].gameObject.name == "R(Clone)" || rooms[i].gameObject.name == "L(Clone)" || rooms[i].gameObject.name == "T(Clone)" || rooms[i].gameObject.name == "B(Clone)")
+                if ((rooms[i].gameObject.name == "R(Clone)" || rooms[i].gameObject.name == "L(Clone)" || rooms[i].gameObject.name == "T(Clone)" || rooms[i].gameObject.name == "B(Clone)") && i != rooms.Count - 1)
+                {
+                    //if (rooms[i].gameObject.transform.Find("TempStairs1"))
+                    //{
+                    //    return;
+                    //}
+                    //else
+                    //{
+                        Debug.Log("Znaleziono");
+                        chest.transform.position = new Vector3(rooms[i].transform.position.x, rooms[i].transform.position.y, -2f);
+                        
+                        chest.gameObject.transform.SetParent(rooms[i].transform);
+                        spawnChest = true;
+                    if (!rooms[i].gameObject.transform.Find("Chest"))
+                    {
+                        rooms[i].transform.Find("AllRandomObj").gameObject.SetActive(true);
+                    }
+                    if (rooms[i].gameObject.transform.Find("Chest"))
+                    {
+                        Destroy(rooms[i].transform.Find("AllRandomObj").gameObject);
+                        Debug.Log("Zmaleziono w pokoju " + rooms[i].gameObject.name);
+                        break;
+                    }
+                    //rooms[i].transform.Find("AllRandomObj").gameObject.SetActive(false);
+                    //Destroy(rooms[i].transform.Find("AllRandomObj").gameObject);
+                    //}
+                }
+                if (rooms[i].gameObject.transform.Find("TempStairs1"))
+                {
+                    Destroy(rooms[i].transform.Find("AllRandomObj").gameObject);
+                }
+                
+            }
+            for (int i = 0; i < rooms.Count; i++)
+            {
+                if (i == rooms.Count - 1)
                 {
                     Debug.Log("Spwan schodow");
                     /*
@@ -57,27 +94,14 @@ public class RoomTemplates : MonoBehaviour
                     //Instantiate(stairs, new Vector3(rooms[i].transform.position.x, rooms[i].transform.position.y, -2f), Quaternion.identity);
                     stairs.transform.position = new Vector3(rooms[i].transform.position.x, rooms[i].transform.position.y, -2f);
                     stairs.gameObject.transform.SetParent(rooms[i].transform);
-                    
+
 
                     spawnStairs = true;
-                    rooms[i].transform.Find("AllRandomObj").gameObject.SetActive(false);
-                }
-                if (rooms[i].gameObject.name == "R(Clone)" || rooms[i].gameObject.name == "L(Clone)" || rooms[i].gameObject.name == "T(Clone)" || rooms[i].gameObject.name == "B(Clone)")
-                {
-                    if (rooms[i].gameObject.transform.Find("TempStairs1"))
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        Debug.Log("Znaleziono");
-                        chest.transform.position = new Vector3(rooms[i].transform.position.x, rooms[i].transform.position.y, -2f);
-                        spawnChest = true;
-                        rooms[i].transform.Find("AllRandomObj").gameObject.SetActive(false);
-                    }
+                    //rooms[i].transform.Find("AllRandomObj").gameObject.SetActive(false);
+                    Destroy(rooms[i].transform.Find("AllRandomObj").gameObject);
                 }
             }
-        }
+            }
         else
         {
             waitTime -= Time.deltaTime;

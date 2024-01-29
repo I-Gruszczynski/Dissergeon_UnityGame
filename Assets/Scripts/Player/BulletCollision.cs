@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletCollision : MonoBehaviour
 {
     public GameObject hitEffect;
+    public int bulletDamage = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,7 @@ public class BulletCollision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-       if(other.gameObject.tag != "Player" && other.gameObject.tag != "RoomFloor" && other.gameObject.tag != "SpawnPoint" && other.gameObject.tag != "Coin" && other.gameObject.tag != "Ammo" && other.gameObject.tag != "Gun" && other.gameObject.tag != "BulletEnemy" && other.gameObject.tag != "Bullet")
+       if(other.gameObject.tag != "Player" && other.gameObject.tag != "RoomFloor" && other.gameObject.tag != "SpawnPoint" && other.gameObject.tag != "Coin" && other.gameObject.tag != "Ammo" && other.gameObject.tag != "Gun" && other.gameObject.tag != "BulletEnemy" && other.gameObject.tag != "Bullet" && other.gameObject.tag != "ToxicZone" && other.gameObject.tag != "Chest" && other.gameObject.tag != "BrickBorder")
         {
             if (other.gameObject.tag != "Enemy")
             {
@@ -29,6 +30,7 @@ public class BulletCollision : MonoBehaviour
                 Destroy(effect, 0.5f);
                 Destroy(gameObject);
             }
+            Debug.Log("Kolizja z: " + other.name);
             Destroy(gameObject);
         }
 

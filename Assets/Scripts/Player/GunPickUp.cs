@@ -8,7 +8,8 @@ public class GunPickUp : MonoBehaviour
 {
     public bool pickUpAllowed;
     public GameObject holder;
-    public GameObject gunsBox;
+    public GameObject objectsContainer;
+    public GameObject gunBox;
 
     public Rigidbody2D rigidbody;
     public Vector2 mousePos;
@@ -47,10 +48,9 @@ public class GunPickUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-            
 
-            if (gameObject.transform.parent.name == "Holder")
+
+        if (gameObject.transform.parent.name == "Holder")
             {
                 if (gameObject.transform.name == "Shotgun")
                 {
@@ -62,6 +62,9 @@ public class GunPickUp : MonoBehaviour
                     bulletMagazineNumberCurrentFloat = gameObject.GetComponent<ShotgunShooting>().bulletMagazineNumber;
                     gunReloadCurrent.text = gameObject.GetComponent<ShotgunShooting>().reloadTime.ToString();
                     reloadTimeCurrentFloat = gameObject.GetComponent<ShotgunShooting>().reloadTime;
+
+                    holder.GetComponentInChildren<GunLayer>().enabled = true;
+                    holder.GetComponentInChildren<ShotgunShooting>().enabled = true;
                 }
                 else if (gameObject.transform.name == "Pistol")
                 {
@@ -73,6 +76,9 @@ public class GunPickUp : MonoBehaviour
                     bulletMagazineNumberCurrentFloat = gameObject.GetComponent<PistolShooting>().bulletMagazineNumber;
                     gunReloadCurrent.text = gameObject.GetComponent<PistolShooting>().reloadTime.ToString();
                     reloadTimeCurrentFloat = gameObject.GetComponent<PistolShooting>().reloadTime;
+
+                    holder.GetComponentInChildren<GunLayer>().enabled = true;
+                    holder.GetComponentInChildren<PistolShooting>().enabled = true;
                 }
                 else if (gameObject.transform.name == "Rifle")
                 {
@@ -84,6 +90,9 @@ public class GunPickUp : MonoBehaviour
                     bulletMagazineNumberCurrentFloat = gameObject.GetComponent<RifleShooting>().bulletMagazineNumber;
                     gunReloadCurrent.text = gameObject.GetComponent<RifleShooting>().reloadTime.ToString();
                     reloadTimeCurrentFloat = gameObject.GetComponent<RifleShooting>().reloadTime;
+
+                    holder.GetComponentInChildren<GunLayer>().enabled = true;
+                    holder.GetComponentInChildren<RifleShooting>().enabled = true;
                 }
                 else
                 {
@@ -215,7 +224,7 @@ public class GunPickUp : MonoBehaviour
 
         }
 
-        if (gameObject.transform.parent == gunsBox.transform)
+        if (gameObject.transform.parent == gunBox.transform)
         {
             transform.rotation = Quaternion.Euler(-1.2f, 0.5f, 0);
         }
@@ -224,7 +233,30 @@ public class GunPickUp : MonoBehaviour
         {
             if (holder.transform.childCount > 0)
             {
-                holder.transform.GetChild(0).gameObject.transform.SetParent(gunsBox.transform);
+                
+                holder.transform.GetChild(0).gameObject.transform.SetParent(objectsContainer.transform, true);
+                objectsContainer.transform.SetParent(null);
+
+                
+
+                if (objectsContainer.transform.Find("Pistol"))
+                {
+                    objectsContainer.GetComponentInChildren<GunLayer>().enabled = false;
+                    objectsContainer.GetComponentInChildren<PistolShooting>().enabled = false;
+                }
+                else if (objectsContainer.transform.Find("Rifle"))
+                {
+                    objectsContainer.GetComponentInChildren<GunLayer>().enabled = false;
+                    objectsContainer.GetComponentInChildren<RifleShooting>().enabled = false;
+                }
+                else if (objectsContainer.transform.Find("Shotgun"))
+                {
+                    objectsContainer.GetComponentInChildren<GunLayer>().enabled = false;
+                    objectsContainer.GetComponentInChildren<ShotgunShooting>().enabled = false;
+                }
+
+
+                //holder.transform.GetChild(0).gameObject.transform.SetParent(gunBox.transform);
             }
             transform.SetParent(holder.transform);
         }
@@ -234,7 +266,8 @@ public class GunPickUp : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (gameObject.transform.parent == gunsBox.transform)
+            //if (gameObject.transform.parent == objectsContainer.transform || gameObject.transform.parent == gunBox.transform)
+            if (gameObject.transform.parent != holder.transform)
             {
                 ButtonKey.SetActive(true);
                 pickUpAllowed = true;
@@ -247,8 +280,9 @@ public class GunPickUp : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (gameObject.transform.parent == gunsBox.transform)
-            {
+           //if (gameObject.transform.parent == objectsContainer.transform || gameObject.transform.parent == gunBox.transform)
+            if (gameObject.transform.parent != holder.transform)
+                {
                 ButtonKey.SetActive(false);
                 pickUpAllowed = false;
                 gunStatic.gameObject.SetActive(false);
